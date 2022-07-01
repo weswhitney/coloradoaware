@@ -1,0 +1,28 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-coloradoaware-dev-172521-authRole",
+            "UnauthRoleArn": "arn:aws:iam::979673662712:role/amplify-coloradoaware-dev-172521-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::979673662712:role/amplify-coloradoaware-dev-172521-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-coloradoaware-dev-172521-deployment",
+            "UnauthRoleName": "amplify-coloradoaware-dev-172521-unauthRole",
+            "StackName": "amplify-coloradoaware-dev-172521",
+            "StackId": "arn:aws:cloudformation:us-east-2:979673662712:stack/amplify-coloradoaware-dev-172521/27cade70-ca6f-11ec-a48d-0a2d2160c28a",
+            "AmplifyAppId": "d14aqppjofgm0b"
+        },
+        "categories": {
+            "auth": {
+                "coloradoaware8999a5b0": {},
+                "true": {}
+            },
+            "notifications": {
+                "Pinpoint": {
+                    "Name": "coloradoaware-dev",
+                    "Id": "9eb094224dc54da19fab740a4723114b",
+                    "Region": "us-east-1"
+                }
+            }
+        }
+    }
+}
