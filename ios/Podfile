@@ -19,6 +19,8 @@ target 'coloradoaware' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'RNAWSCognito', :path => '../node_modules/amazon-cognito-identity-js'
+
   target 'coloradoawareTests' do
     inherit! :complete
     # Pods for testing

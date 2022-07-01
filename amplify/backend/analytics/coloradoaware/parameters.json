@@ -1,0 +1,21 @@
+{
+    "appName": "coloradoaware",
+    "roleName": "pinpointLambdaRole2a444617",
+    "cloudformationPolicyName": "cloudformationPolicy2a444617",
+    "cloudWatchPolicyName": "cloudWatchPolicy2a444617",
+    "pinpointPolicyName": "pinpointPolicy2a444617",
+    "authPolicyName": "pinpoint_amplify_2a444617",
+    "unauthPolicyName": "pinpoint_amplify_2a444617",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
