@@ -1,13 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import {Amplify} from 'aws-amplify';
 // @ts-ignore
 import {withAuthenticator} from 'aws-amplify-react-native';
@@ -15,7 +5,7 @@ import {Analytics} from '@aws-amplify/analytics';
 import PushNotification from '@aws-amplify/pushnotification';
 import {Auth} from '@aws-amplify/auth';
 
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -97,22 +87,6 @@ const Section: React.FC<{
 };
 
 const App = () => {
-  const [userSub, setUserSub] = useState('');
-
-  // thought i needed this for updating the userId in the updated endpoint call but I don't think I actually need it.
-  useEffect(() => {
-    const getUserSub = async () => {
-      try {
-        const {attributes} = await Auth.currentAuthenticatedUser();
-        setUserSub(attributes.sub);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
-    getUserSub();
-  }, []);
-
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
