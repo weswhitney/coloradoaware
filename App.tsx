@@ -1,13 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import {Amplify} from 'aws-amplify';
 // @ts-ignore
 import {withAuthenticator} from 'aws-amplify-react-native';
@@ -34,6 +24,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import awsmobile from './src/aws-exports';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
 Amplify.configure(awsmobile);
 Auth.configure(awsmobile);
@@ -43,23 +34,12 @@ PushNotification.configure(awsmobile);
 PushNotification.onRegister((token: any) => {
   console.log('in app registration', token);
   Analytics.updateEndpoint({
-    address: token,
-    // @TODO add custom attributes?
-    // attributes: {
-    // Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
-    // grid: 'Denver',
-    // },
-    // @TODO might want to add this is?
-    // location: {
-    //   city: 'xxxxxx', // The city where the endpoint is located.
-    //   country: 'xxxxxx', // The two-letter code for the country or region of the endpoint. Specified as an ISO 3166-1 alpha-2 code, such as "US" for the United States.
-    //   latitude: 0, // The latitude of the endpoint location, rounded to one decimal place.
-    //   longitude: 0, // The longitude of the endpoint location, rounded to one decimal place.
-    //   postalCode: 'xxxxxx', // The postal code or zip code of the endpoint.
-    //   region: 'xxxxxx' // The region of the endpoint location. For example, in the United States, this corresponds to a state.
-    // },
-    optOut: 'NONE',
-    userId: '<user sub here>', // user sub
+    address: token, // The unique identifier for the recipient. device token
+    // optOut: 'NONE',
+    // from s.o. https://stackoverflow.com/questions/57810979/how-to-properly-configure-amplify-analytics
+    // As you are using Cognito, Amazon Cognito can add user IDs and attributes to your endpoints automatically.
+    // For the endpoint user ID value, Amazon Cognito assigns the sub value that's assigned to the user in the user pool.
+    // userId: user,  this would be the user sub
   })
     .then(data => {
       console.log('endpoint updated', JSON.stringify(data));
@@ -72,6 +52,7 @@ PushNotification.onRegister((token: any) => {
 PushNotification.onNotification((notification: any) => {
   // display notification in debug log in XCode
   console.log('in app notification received', notification);
+  notification.finish(PushNotificationIOS.FetchResult.NoData);
 });
 
 PushNotification.requestIOSPermissions();
