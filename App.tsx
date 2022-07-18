@@ -31,15 +31,19 @@ Auth.configure(awsmobile);
 Analytics.configure(awsmobile);
 PushNotification.configure(awsmobile);
 
-PushNotification.onRegister((token: any) => {
+let userId;
+const currentUser = async () => {
+  const user = await Auth.currentUserInfo();
+  userId = user.attributes.sub;
+  return userId;
+};
+
+PushNotification.onRegister(async (token: any) => {
   console.log('in app registration', token);
+  const userId = await currentUser();
   Analytics.updateEndpoint({
-    address: token, // The unique identifier for the recipient. device token
-    // optOut: 'NONE',
-    // from s.o. https://stackoverflow.com/questions/57810979/how-to-properly-configure-amplify-analytics
-    // As you are using Cognito, Amazon Cognito can add user IDs and attributes to your endpoints automatically.
-    // For the endpoint user ID value, Amazon Cognito assigns the sub value that's assigned to the user in the user pool.
-    // userId: user,  this would be the user sub
+    address: token, // device token
+    userId: userId, // user sub from cognito
   })
     .then(data => {
       console.log('endpoint updated', JSON.stringify(data));
